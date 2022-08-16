@@ -43,6 +43,11 @@ const SignIn: NextPage = () => {
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
         <title>Discord / Sign-in</title>
+        <link
+          rel="shortcut icon"
+          href="/discord-icon.svg"
+          type="image/x-icon"
+        />
       </Head>
       <div>
         <Image
