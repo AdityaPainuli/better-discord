@@ -42,8 +42,7 @@ const SignIn: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>Discord Clone</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Discord / Sign-in</title>
       </Head>
       <div>
         <Image
