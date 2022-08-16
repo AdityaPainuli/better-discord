@@ -11,14 +11,14 @@ const Home: NextPage = () => {
       </Head>
       <div>
         <Image
-          src="/../public/background.jpg"
+          src="/background.jpg"
           layout="fill"
           alt="background-img"
           className="absolute top-0 left-0 w-screen h-screen -z-10"
         />
         <div className="h-[600px] w-[550px] pt-[4rem] flex flex-col justify-center shadow-md bg-gray-700 rounded-md">
           <Image
-            src="/../public/discord-logo.png"
+            src="/discord-logo.png"
             alt="logo"
             height={"200px"}
             width={"300px"}
