@@ -2,8 +2,28 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../backend/firebase";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-const Home: NextPage = () => {
+const SignUp: NextPage = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const handleSignup = async () => {
+    //Signup code.
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        updateProfile(user.user, { displayName: username });
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        router.push("/signin");
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -32,29 +52,54 @@ const Home: NextPage = () => {
             <p className="text-gray-300 font-semibold text-md my-4 text-center">
               We're so exicted to see you again!
             </p>
-            <div className="flex flex-col w-[100%] ">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSignup();
+              }}
+              className="flex flex-col w-[100%] "
+            >
               <div className="flex flex-col">
                 <label htmlFor="username" className="signin_label">
                   Username
                 </label>
-                <input type="text" className="signin_input" />
+                <input
+                  type="text"
+                  className="signin_input"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </div>
               <div className="flex flex-col">
                 <label htmlFor="email" className="signin_label">
                   Email
                 </label>
-                <input type="email" className="signin_input" />
+                <input
+                  type="email"
+                  className="signin_input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="flex flex-col">
                 <label htmlFor="password" className="signin_label">
                   Password
                 </label>
-                <input type="password" className="signin_input !mb-0" />
+                <input
+                  type="password"
+                  className="signin_input !mb-0"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <span className="text-blue-400 w-max text-sm mb-[1rem] ml-[2rem] hover:underline cursor-pointer">
                   Forget Password?
                 </span>
               </div>
-              <button className="bg-blue-600 text-white font-semibold text-center text-lg p-2 w-[80%] mx-auto cursor-pointer hover:bg-blue-500 rounded-md ">
+              <button
+                type={"submit"}
+                onClick={handleSignup}
+                className="bg-blue-600 text-white font-semibold text-center text-lg p-2 w-[80%] mx-auto cursor-pointer hover:bg-blue-500 rounded-md "
+              >
                 Login
               </button>
               <p className="w-max text-gray-400 mt-2 text-sm mb-[1rem] ml-[2rem] ">
@@ -65,7 +110,7 @@ const Home: NextPage = () => {
                   </span>
                 </Link>
               </p>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -73,4 +118,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default SignUp;
