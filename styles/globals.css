@@ -7,5 +7,5 @@
 }
 
 .signin_input {
-  @apply p-2 bg-gray-800 rounded-sm mx-[2rem] mb-[1rem];
+  @apply p-2 bg-gray-800 rounded-sm mx-[2rem] mb-[1rem] text-white outline-none;
 }
