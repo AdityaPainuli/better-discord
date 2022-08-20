@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { channelState, selectChannel } from "../slices/channelSlice";
 import { modalState, openModal } from "../slices/newchannelModalSlice";
-import Modal from "../components/Modal";
-import StatusBar from "../components/StatusBar";
-import Sidebar from "../components/Sidebar";
-import MainMessage from "../components/MainMessage";
-import AccountInfo from "../components/AccountInfo";
-import RoomName from "../components/RoomName";
+import Modal from "./Modal";
+import StatusBar from "./StatusBar";
+import Sidebar from "./Sidebar";
+import MainMessage from "./MainMessage";
+import AccountInfo from "./AccountInfo";
+import RoomName from "./RoomName";
 
 const HomePage = () => {
   const [user] = useAuthState(auth);

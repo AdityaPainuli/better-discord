@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useAuthState } from "react-firebase-hooks/auth";
-import HomePage from "./Homepage";
+import HomePage from "../components/Homepage";
 import { auth } from "../backend/firebase";
 import Signin from "./signin";
 
