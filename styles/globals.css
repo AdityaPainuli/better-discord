@@ -2,10 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+}
 .signin_label {
   @apply text-gray-300  font-semibold mx-[2rem] mb-2;
 }
 
 .signin_input {
   @apply p-2 bg-gray-800 rounded-sm mx-[2rem] mb-[1rem] text-white outline-none;
+}
+
+.channel-box {
+  @apply transition-all ease-in delay-150 rounded-3xl hover:rounded-xl hover:bg-green-500   duration-300  cursor-pointer  overflow-hidden flex items-center justify-center h-[50px] w-[50px] bg-gray-500;
+}
+
+.active-channel {
+  @apply rounded-xl bg-green-500;
 }

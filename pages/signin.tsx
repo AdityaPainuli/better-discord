@@ -8,12 +8,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { auth } from "../backend/firebase";
+import { login } from "../slices/userSlice";
 
 const SignIn: NextPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   // Sign-in the user with email-password.
   const signIn = async () => {
@@ -21,7 +24,7 @@ const SignIn: NextPage = () => {
       .then((user) => {
         setEmail("");
         setPassword("");
-        router.push("/homepage");
+        dispatch(login(user.user.email));
       })
       .catch((error) => alert(error.message));
   };

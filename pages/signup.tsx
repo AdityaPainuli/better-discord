@@ -20,9 +20,9 @@ const SignUp: NextPage = () => {
         setEmail("");
         setPassword("");
         setUsername("");
-        router.push("/signin");
+        router.push("/");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => alert(error.message));
   };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">

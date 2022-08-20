@@ -1,40 +1,56 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../backend/firebase";
 import Head from "next/head";
-import { NextPage } from "next";
-import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { channelState, selectChannel } from "../slices/channelSlice";
+import { modalState, openModal } from "../slices/newchannelModalSlice";
+import Modal from "../components/Modal";
+import StatusBar from "../components/StatusBar";
+import Sidebar from "../components/Sidebar";
+import MainMessage from "../components/MainMessage";
+import AccountInfo from "../components/AccountInfo";
+import RoomName from "../components/RoomName";
 
-const homepage: NextPage = () => {
+const HomePage = () => {
   const [user] = useAuthState(auth);
+  const currentChannel = useSelector(channelState);
+  const modalStateValue = useSelector(modalState);
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, [user]);
   return (
-    <div className="flex flex-col min-h-screen w-screen justify-center items-center">
+    <div className="flex bg-gray-800 text-white max-h-screen overflow-hidden">
       <Head>
         <title>Discord / Home</title>
+        <link
+          rel="shortcut icon"
+          href="/discord-icon.svg"
+          type="image/x-icon"
+        />
       </Head>
-      <div className="flex flex-col space-y-4">
-        <h1 className="text-3xl font-bold text-center">
-          Hello, {user?.displayName} 👋
-        </h1>
-        <button
-          onClick={() => {
-            signOut(auth);
-            router.push("/signin");
-          }}
-          className="bg-blue-500 hover:bg-blue-400 w-max m-auto text-white py-2 px-4 rounded-md cursor-pointer"
-        >
-          Log out{" "}
-        </button>
+      {/* Sidebar -for left side */}
+      <Sidebar />
+      {/* Primary*/}
+      <div className="w-[95%] flex h-screen ">
+        {/* Side-portion */}
+        <div className=" hidden lg:flex justify-between flex-col lg:w-[20%]  bg-gray-600 h-screen">
+          {/* Channel name and different rooms */}
+          <RoomName />
+          <AccountInfo />
+
+          {/* Your status and information. */}
+        </div>
+        {/* Middle-portion */}
+        <div className="relative lg:w-[80%] w-full pl-4 border-l-gray-800 border bg-gray-700">
+          {modalStateValue && <Modal />}
+          <StatusBar />
+
+          <MainMessage />
+        </div>
+        {/* Right-portion */}
+        <div className="bg-gray-600 h-screen"></div>
       </div>
     </div>
   );
 };
 
-export default homepage;
+export default HomePage;
